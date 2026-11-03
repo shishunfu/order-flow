@@ -1,0 +1,22 @@
+services:
+  mysql:
+    image: mysql:8.4.8
+    container_name: order-flow-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: order_flow
+      MYSQL_USER: orderflow
+      MYSQL_PASSWORD: orderflow_dev
+      MYSQL_ROOT_PASSWORD: root_dev_only
+      TZ: Asia/Shanghai
+    ports:
+      - "3306:3306"
+    volumes:
+      - order-flow-mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot_dev_only"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+volumes:
+  order-flow-mysql-data:
