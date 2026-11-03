@@ -9,6 +9,25 @@
 - Spring MVC、Validation、JDBC、Actuator
 - MySQL 8.4.8、Flyway、JUnit
 
+## 环境
+```bash
+PS order-flow (main)> java -version
+openjdk version "25.0.2" 2026-01-20 LTS
+OpenJDK Runtime Environment (build 25.0.2+12-LTS)
+OpenJDK 64-Bit Server VM (build 25.0.2+12-LTS, mixed mode, sharing)
+
+PS order-flow (main)> mvn -v
+Apache Maven 3.9.12 (848fbb4bf2d427b72bdb2471c22fced7ebd9a7a1)
+Maven home: C:\ProgramFiles\Maven\apache-maven-3.9.12
+Java version: 25.0.2, vendor: BellSoft, runtime: C:\ProgramFiles\Jdk\jdk25
+Default locale: zh_CN, platform encoding: UTF-8
+OS name: "windows 11", version: "10.0", arch: "amd64", family: "windows"
+
+PS order-flow (main)> docker compose -f deploy/docker-compose.yml ps
+NAME               IMAGE         COMMAND                   SERVICE   CREATED          STATUS                    PORTS
+order-flow-mysql   mysql:8.4.8   "docker-entrypoint.s…"   mysql     47 minutes ago   Up 47 minutes (healthy)   0.0.0.0:3306->3306/tcp, [::]:3306->3306/tcp
+```
+
 ## 启动
 ### 本地开发
 ```bash
