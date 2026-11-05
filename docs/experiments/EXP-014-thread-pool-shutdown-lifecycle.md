@@ -23,14 +23,14 @@
 
 实测结果：
 
-| 观察项 | 实测结果 |
-|---|---|
-| shutdown 后 isShutdown | true |
-| shutdown 后 isTerminated | false |
-| shutdown 后队列任务数 | 2 |
-| 最终完成任务数 | 4 |
-| 最终 isTerminated | true |
-| 关闭后提交新任务 | RejectedExecutionException |
+| 观察项                   | 实测结果                   |
+|--------------------------|----------------------------|
+| shutdown 后 isShutdown   | true                       |
+| shutdown 后 isTerminated | false                      |
+| shutdown 后队列任务数    | 2                          |
+| 最终完成任务数           | 4                          |
+| 最终 isTerminated        | true                       |
+| 关闭后提交新任务         | RejectedExecutionException |
 
 结论：
 
@@ -48,15 +48,15 @@ shutdown() 停止接收新任务，但不会丢弃已经提交的任务。正在
 
 实测结果：
 
-| 观察项 | 实测结果 |
-|---|---|
-| 调用前队列任务数 | 2 |
-| shutdownNow 返回任务数 | 2 |
-| 返回对象类型 | FutureTask |
-| 正在执行的任务收到中断 | 是 |
-| 正在执行的任务退出 | 是 |
-| 排队 Future 自动取消 | 否 |
-| 手动 cancel 后 Future 取消 | 是 |
+| 观察项                     | 实测结果   |
+|----------------------------|------------|
+| 调用前队列任务数           | 2          |
+| shutdownNow 返回任务数     | 2          |
+| 返回对象类型               | FutureTask |
+| 正在执行的任务收到中断     | 是         |
+| 正在执行的任务退出         | 是         |
+| 排队 Future 自动取消       | 否         |
+| 手动 cancel 后 Future 取消 | 是         |
 
 重要发现：
 
@@ -82,11 +82,11 @@ shutdownNow() 会尝试中断正在执行的任务，并返回尚未开始执行
 
 实测结果：
 
-| 观察项 | 第一次等待 | 第二次等待 |
-|---|---|---|
-| awaitTermination | false | true |
-| isShutdown | true | true |
-| isTerminated | false | true |
+| 观察项           | 第一次等待 | 第二次等待 |
+|------------------|------------|------------|
+| awaitTermination | false      | true       |
+| isShutdown       | true       | true       |
+| isTerminated     | false      | true       |
 
 结论：
 
@@ -94,11 +94,11 @@ awaitTermination() 负责等待线程池进入终止状态，不负责发起关�
 
 ## 6. 三个 API 的职责
 
-| API | 主要职责 |
-|---|---|
-| shutdown() | 停止接收新任务，允许已提交任务执行完毕 |
-| shutdownNow() | 尝试中断运行任务，移除并返回等待任务 |
-| awaitTermination() | 等待线程池终止，支持超时 |
+| API                | 主要职责                               |
+|--------------------|----------------------------------------|
+| shutdown()         | 停止接收新任务，允许已提交任务执行完毕 |
+| shutdownNow()      | 尝试中断运行任务，移除并返回等待任务   |
+| awaitTermination() | 等待线程池终止，支持超时               |
 
 ## 7. 工程实践结论
 
